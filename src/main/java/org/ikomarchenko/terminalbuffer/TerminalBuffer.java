@@ -1,29 +1,23 @@
 package org.ikomarchenko.terminalbuffer;
 
+import org.ikomarchenko.terminalbuffer.buffer.Screen;
+import org.ikomarchenko.terminalbuffer.buffer.ScrollbackBuffer;
 import org.ikomarchenko.terminalbuffer.model.Cursor;
-import org.ikomarchenko.terminalbuffer.model.Line;
 import org.ikomarchenko.terminalbuffer.model.TextAttributes;
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
 
 public final class TerminalBuffer {
 
-    private final  int width;
+    private final int width;
     private final int height;
-    private final  int scrollbackLimit;
 
-    private final  List<Line> screen;
-    private final Deque<Line> scrollback;
+    private final Screen screen;
+    private final ScrollbackBuffer scrollback;
 
     private final Cursor cursor;
 
-    private  TextAttributes currentAttributes;
+    private TextAttributes currentAttributes;
 
     public TerminalBuffer(int width, int height, int scrollbackLimit) {
-
         if (width <= 0) {
             throw new IllegalArgumentException("Width must be greater than 0");
         }
@@ -36,22 +30,10 @@ public final class TerminalBuffer {
 
         this.width = width;
         this.height = height;
-        this.scrollbackLimit = scrollbackLimit;
-
-        this.screen = new ArrayList<>(height);
-        this.scrollback = new ArrayDeque<>(scrollbackLimit);
-
-        initializeScreen();
-
+        this.screen = new Screen(width, height);
+        this.scrollback = new ScrollbackBuffer(scrollbackLimit);
         this.cursor = new Cursor(0, 0);
-
         this.currentAttributes = TextAttributes.defaultAttributes();
-    }
-
-    private void initializeScreen() {
-        for (int i = 0; i < height; i++) {
-            screen.add(new Line(width));
-        }
     }
 
     public int getWidth() {
@@ -63,7 +45,15 @@ public final class TerminalBuffer {
     }
 
     public int getScrollbackLimit() {
-        return scrollbackLimit;
+        return scrollback.getLimit();
+    }
+
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public ScrollbackBuffer getScrollback() {
+        return scrollback;
     }
 
     public Cursor getCursor() {
@@ -80,13 +70,5 @@ public final class TerminalBuffer {
         }
 
         this.currentAttributes = attributes;
-    }
-
-    public List<Line> getScreen() {
-        return screen;
-    }
-
-    public Deque<Line> getScrollback() {
-        return scrollback;
     }
 }
