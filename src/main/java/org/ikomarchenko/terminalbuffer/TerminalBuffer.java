@@ -5,6 +5,7 @@ import org.ikomarchenko.terminalbuffer.buffer.ScrollbackBuffer;
 import org.ikomarchenko.terminalbuffer.model.Cursor;
 import org.ikomarchenko.terminalbuffer.model.TextAttributes;
 import org.ikomarchenko.terminalbuffer.service.CursorService;
+import org.ikomarchenko.terminalbuffer.service.BufferWriteService;
 
 public final class TerminalBuffer {
 
@@ -16,6 +17,7 @@ public final class TerminalBuffer {
 
     private final Cursor cursor;
     private final CursorService cursorService;
+    private final BufferWriteService bufferWriteService;
 
     private TextAttributes currentAttributes;
 
@@ -36,6 +38,7 @@ public final class TerminalBuffer {
         this.scrollback = new ScrollbackBuffer(scrollbackLimit);
         this.cursor = new Cursor(0, 0);
         this.cursorService = new CursorService();
+        this.bufferWriteService = new BufferWriteService();
         this.currentAttributes = TextAttributes.defaultAttributes();
     }
 
@@ -93,5 +96,9 @@ public final class TerminalBuffer {
 
     public void moveCursorRight(int cells) {
         cursorService.moveRight(cursor, cells, width, height);
+    }
+
+    public void write(String text) {
+        bufferWriteService.write(screen, scrollback, cursor, currentAttributes, text);
     }
 }
