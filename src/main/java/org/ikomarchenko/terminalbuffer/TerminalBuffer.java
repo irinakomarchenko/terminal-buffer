@@ -4,12 +4,11 @@ import org.ikomarchenko.terminalbuffer.buffer.Screen;
 import org.ikomarchenko.terminalbuffer.buffer.ScrollbackBuffer;
 import org.ikomarchenko.terminalbuffer.model.Cursor;
 import org.ikomarchenko.terminalbuffer.model.TextAttributes;
-import org.ikomarchenko.terminalbuffer.service.BufferMaintenanceService;
-import org.ikomarchenko.terminalbuffer.service.CursorService;
-import org.ikomarchenko.terminalbuffer.service.BufferWriteService;
 import org.ikomarchenko.terminalbuffer.service.BufferContentService;
 import org.ikomarchenko.terminalbuffer.service.BufferInsertService;
-
+import org.ikomarchenko.terminalbuffer.service.BufferMaintenanceService;
+import org.ikomarchenko.terminalbuffer.service.BufferWriteService;
+import org.ikomarchenko.terminalbuffer.service.CursorService;
 
 public final class TerminalBuffer {
 
