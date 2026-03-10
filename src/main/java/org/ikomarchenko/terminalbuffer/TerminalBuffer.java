@@ -110,6 +110,10 @@ public final class TerminalBuffer {
         bufferWriteService.write(screen, scrollback, cursor, currentAttributes, text);
     }
 
+    public void fillLine(char character) {
+        bufferWriteService.fillLine(screen, cursor, currentAttributes, character);
+    }
+
     public void insertEmptyLineAtBottom() {
         bufferMaintenanceService.insertEmptyLineAtBottom(screen, scrollback);
     }
