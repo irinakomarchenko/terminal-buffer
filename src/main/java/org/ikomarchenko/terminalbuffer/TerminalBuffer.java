@@ -4,6 +4,7 @@ import org.ikomarchenko.terminalbuffer.buffer.Screen;
 import org.ikomarchenko.terminalbuffer.buffer.ScrollbackBuffer;
 import org.ikomarchenko.terminalbuffer.model.Cursor;
 import org.ikomarchenko.terminalbuffer.model.TextAttributes;
+import org.ikomarchenko.terminalbuffer.service.BufferMaintenanceService;
 import org.ikomarchenko.terminalbuffer.service.CursorService;
 import org.ikomarchenko.terminalbuffer.service.BufferWriteService;
 
@@ -18,6 +19,7 @@ public final class TerminalBuffer {
     private final Cursor cursor;
     private final CursorService cursorService;
     private final BufferWriteService bufferWriteService;
+    private final BufferMaintenanceService bufferMaintenanceService;
 
     private TextAttributes currentAttributes;
 
@@ -39,6 +41,7 @@ public final class TerminalBuffer {
         this.cursor = new Cursor(0, 0);
         this.cursorService = new CursorService();
         this.bufferWriteService = new BufferWriteService();
+        this.bufferMaintenanceService = new BufferMaintenanceService();
         this.currentAttributes = TextAttributes.defaultAttributes();
     }
 
@@ -100,5 +103,17 @@ public final class TerminalBuffer {
 
     public void write(String text) {
         bufferWriteService.write(screen, scrollback, cursor, currentAttributes, text);
+    }
+
+    public void insertEmptyLineAtBottom() {
+        bufferMaintenanceService.insertEmptyLineAtBottom(screen, scrollback);
+    }
+
+    public void clearScreen() {
+        bufferMaintenanceService.clearScreen(screen);
+    }
+
+    public void clearScreenAndScrollback() {
+        bufferMaintenanceService.clearScreenAndScrollback(screen, scrollback);
     }
 }
