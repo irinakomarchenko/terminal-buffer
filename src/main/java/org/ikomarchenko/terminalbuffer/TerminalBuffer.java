@@ -7,6 +7,8 @@ import org.ikomarchenko.terminalbuffer.model.TextAttributes;
 import org.ikomarchenko.terminalbuffer.service.BufferMaintenanceService;
 import org.ikomarchenko.terminalbuffer.service.CursorService;
 import org.ikomarchenko.terminalbuffer.service.BufferWriteService;
+import org.ikomarchenko.terminalbuffer.service.BufferContentService;
+
 
 public final class TerminalBuffer {
 
@@ -20,6 +22,8 @@ public final class TerminalBuffer {
     private final CursorService cursorService;
     private final BufferWriteService bufferWriteService;
     private final BufferMaintenanceService bufferMaintenanceService;
+    private final BufferContentService bufferContentService;
+
 
     private TextAttributes currentAttributes;
 
@@ -42,6 +46,7 @@ public final class TerminalBuffer {
         this.cursorService = new CursorService();
         this.bufferWriteService = new BufferWriteService();
         this.bufferMaintenanceService = new BufferMaintenanceService();
+        this.bufferContentService = new BufferContentService();
         this.currentAttributes = TextAttributes.defaultAttributes();
     }
 
@@ -115,5 +120,25 @@ public final class TerminalBuffer {
 
     public void clearScreenAndScrollback() {
         bufferMaintenanceService.clearScreenAndScrollback(screen, scrollback);
+    }
+
+    public char getCharacterAt(int row, int column) {
+        return bufferContentService.getCharacterAt(screen, scrollback, row, column);
+    }
+
+    public TextAttributes getAttributesAt(int row, int column) {
+        return bufferContentService.getAttributesAt(screen, scrollback, row, column);
+    }
+
+    public String getLineAsString(int row) {
+        return bufferContentService.getLineAsString(screen, scrollback, row);
+    }
+
+    public String getScreenContentAsString() {
+        return bufferContentService.getScreenContentAsString(screen);
+    }
+
+    public String getBufferContentAsString() {
+        return bufferContentService.getBufferContentAsString(screen, scrollback);
     }
 }

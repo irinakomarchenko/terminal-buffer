@@ -3,7 +3,6 @@ package org.ikomarchenko.terminalbuffer.service;
 import org.ikomarchenko.terminalbuffer.buffer.Screen;
 import org.ikomarchenko.terminalbuffer.buffer.ScrollbackBuffer;
 import org.ikomarchenko.terminalbuffer.model.Line;
-import org.ikomarchenko.terminalbuffer.model.TerminalColor;
 
 public final class BufferMaintenanceService {
 
