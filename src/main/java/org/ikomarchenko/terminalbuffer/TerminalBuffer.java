@@ -8,6 +8,7 @@ import org.ikomarchenko.terminalbuffer.service.BufferMaintenanceService;
 import org.ikomarchenko.terminalbuffer.service.CursorService;
 import org.ikomarchenko.terminalbuffer.service.BufferWriteService;
 import org.ikomarchenko.terminalbuffer.service.BufferContentService;
+import org.ikomarchenko.terminalbuffer.service.BufferInsertService;
 
 
 public final class TerminalBuffer {
@@ -23,6 +24,7 @@ public final class TerminalBuffer {
     private final BufferWriteService bufferWriteService;
     private final BufferMaintenanceService bufferMaintenanceService;
     private final BufferContentService bufferContentService;
+    private final BufferInsertService bufferInsertService;
 
 
     private TextAttributes currentAttributes;
@@ -47,6 +49,7 @@ public final class TerminalBuffer {
         this.bufferWriteService = new BufferWriteService();
         this.bufferMaintenanceService = new BufferMaintenanceService();
         this.bufferContentService = new BufferContentService();
+        this.bufferInsertService = new BufferInsertService();
         this.currentAttributes = TextAttributes.defaultAttributes();
     }
 
@@ -108,6 +111,10 @@ public final class TerminalBuffer {
 
     public void write(String text) {
         bufferWriteService.write(screen, scrollback, cursor, currentAttributes, text);
+    }
+
+    public void insert(String text) {
+        bufferInsertService.insert(screen, scrollback, cursor, currentAttributes, text);
     }
 
     public void fillLine(char character) {
