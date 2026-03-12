@@ -98,7 +98,8 @@ public final class TerminalBufferCli {
                     continue;
                 }
 
-                System.out.println("Unknown command. Use: write <text>, insert <text>, cursor <column> <row>, print, clear, exit");
+                System.out.println("Unknown command. Use: write <text>, insert <text>, " +
+                        "cursor <column> <row>, print, clear, exit");
 
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());

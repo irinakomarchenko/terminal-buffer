@@ -10,6 +10,13 @@ import org.ikomarchenko.terminalbuffer.service.BufferMaintenanceService;
 import org.ikomarchenko.terminalbuffer.service.BufferWriteService;
 import org.ikomarchenko.terminalbuffer.service.CursorService;
 
+/**
+ * Represents a terminal text buffer with a visible screen area
+ * and an immutable scrollback history.
+ * <p>
+ * The buffer supports writing text, wrapping lines, scrolling,
+ * cursor movement and resizing.
+ */
 public final class TerminalBuffer {
 
     private final int width;

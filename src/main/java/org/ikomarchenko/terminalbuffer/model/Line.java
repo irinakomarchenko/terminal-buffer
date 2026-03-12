@@ -33,7 +33,7 @@ public final class Line {
         cells[column] = cell;
     }
 
-    public void fill ( Cell cell) {
+    public void fill(Cell cell) {
         if (cell == null) {
             throw new IllegalArgumentException("Cell must not be null");
         }

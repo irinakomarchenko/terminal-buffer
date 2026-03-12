@@ -13,10 +13,10 @@ public final class Screen {
     private final List<Line> lines;
 
     public Screen(int width, int height) {
-        if (width <= 0 ) {
+        if (width <= 0) {
             throw new IllegalArgumentException("Width must be greater than 0");
         }
-        if (height <= 0 ) {
+        if (height <= 0) {
             throw new IllegalArgumentException("Height must be greater than 0");
         }
 

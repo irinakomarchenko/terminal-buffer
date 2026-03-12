@@ -14,7 +14,9 @@ public final class TextAttributes {
     public TextAttributes(TerminalColor foreground, TerminalColor background, Set<TextStyle> styles) {
         this.foreground = Objects.requireNonNull(foreground, "foreground must not be null");
         this.background = Objects.requireNonNull(background, "background must not be null");
-        this.styles = Collections.unmodifiableSet(EnumSet.copyOf(Objects.requireNonNull(styles, "styles must not be null")
+        this.styles = Collections
+                .unmodifiableSet(EnumSet
+                        .copyOf(Objects.requireNonNull(styles, "styles must not be null")
         ));
     }
 
@@ -44,8 +46,12 @@ public final class TextAttributes {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof TextAttributes that)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof TextAttributes that)) {
+            return false;
+        }
         return foreground == that.foreground
                 && background == that.background
                 && styles.equals(that.styles);
